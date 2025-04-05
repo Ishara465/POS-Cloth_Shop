@@ -1,5 +1,13 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
-import { Dashboard, Home, Inventory, Product, Sales } from "./pages/index.js";
+import {
+  Customer,
+  Dashboard,
+  Home,
+  Inventory,
+  Product,
+  Return,
+  Sales,
+} from "./pages/index.js";
 import Headers from "./shared/Headers.jsx";
 
 function App() {
@@ -12,6 +20,8 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/sales" element={<Sales />}></Route>
         <Route path="/inventory" element={<Inventory />}></Route>
+        <Route path="/customer" element={<Customer />}></Route>
+        <Route path="/return" element={<Return />}></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -13,8 +13,8 @@ const InventoryListPage = () => {
     setIsModalOpen(false);
   };
   return (
-    <div className="flex bg-[#383838] w-300 h-100 rounded-lg p-4 overflow-hidden flex-col">
-      <div className="flex flex-row justify-between  w-full ">
+    <div className="flex bg-[#383838] w-350 h-100 rounded-lg p-4 overflow-hidden flex-col">
+      <div className="flex flex-row justify-between   ">
         <h1 className="text-[#EEEEEE] text-xl px-2 font-bold">Inventory</h1>
 
         <div className="bg-[#232323] rounded-lg flex w-80 h-10 items-center justify-center  ">

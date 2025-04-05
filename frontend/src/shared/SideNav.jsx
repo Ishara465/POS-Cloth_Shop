@@ -54,7 +54,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          // onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/customer")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <IoMdPerson className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -63,7 +63,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          // onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/return")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <PiKeyReturnFill className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
