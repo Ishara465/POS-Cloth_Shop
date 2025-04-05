@@ -13,7 +13,7 @@ const SideNav = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="side-nav bg-[#383838] w-70 h-full flex flex-col justify-between p-5">
+    <div className="side-nav bg-[#383838] w-70 h-full flex flex-col justify-between p-5 rounded-lg shadow-lg shadow-black">
       <div className="flex flex-col gap-5 m-5 ">
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
@@ -45,7 +45,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          // onClick={() => navigate("#")}
+          onClick={() => navigate("/inventory")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <MdOutlineInventory className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
