@@ -9,7 +9,7 @@ const AddItems = ({ setIsModalOpen }) => {
 
   return (
     <div className="fixed inset-0 bg-[#232323]  flex items-center justify-center z-50 modal-backdrop ">
-      <div className="bg-[#8A8A8A] rounded-lg p-6 w-96">
+      <div className="bg-[#383838] rounded-lg p-6 w-96">
         <h2 className="text-xl text-[#EEEEEE] font-bold mb-4">
           Add New Product
         </h2>
