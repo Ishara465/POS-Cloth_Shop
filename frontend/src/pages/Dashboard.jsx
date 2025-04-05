@@ -27,7 +27,7 @@ const Dashboard = () => {
           <SoldClothCard />
           <ReturnClothCard />
         </div>
-        <div className="flex px-10 py-2 gap-2 absolute bottom-0 right-5 top-30">
+        <div className="flex px-4 py-2 gap-1 absolute bottom-0 right-4 top-30">
           <RemainderCard />
           <ReChat />
         </div>
