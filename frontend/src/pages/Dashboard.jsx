@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import SideNav from "../shared/SideNav";
 import RevenueCard from "../components/dashboard/RevenueCard";
 import AvailableProductCard from "../components/dashboard/AvailableProductCard";
@@ -8,12 +8,12 @@ import RemainderCard from "../components/dashboard/RemainderCard";
 import EarningSummaryCard from "../components/dashboard/EarningSummaryCard";
 import ReChat from "../components/dashboard/ReChart";
 
-const Dashboard = () => {
+const Dashboard = ({ setActiveSection }) => {
   return (
     <div className="flex bg-[#232323] h-[calc(100vh-7.5rem)] overflow-hidden">
       {/* Left div */}
       <div className="flex-1 m-2  rounded-2xl shadow-lg">
-        <SideNav />
+        <SideNav setActiveSection={setActiveSection} />
       </div>
 
       {/* right div */}

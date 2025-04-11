@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
 import { MdOutlineProductionQuantityLimits } from "react-icons/md";
@@ -17,7 +17,7 @@ const SideNav = () => {
       <div className="flex flex-col gap-5 m-5 ">
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/", "Home")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <FaHome className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -27,7 +27,7 @@ const SideNav = () => {
 
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/product")}
+          onClick={() => navigate("/product", "Product")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <MdOutlineProductionQuantityLimits className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -36,7 +36,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/sales")}
+          onClick={() => navigate("/sales", "Sales")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <MdCalculate className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -45,7 +45,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/inventory")}
+          onClick={() => navigate("/inventory", "Inventory")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <MdOutlineInventory className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -54,7 +54,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/customer")}
+          onClick={() => navigate("/customer", "Customer")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <IoMdPerson className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -63,7 +63,7 @@ const SideNav = () => {
         </button>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/return")}
+          onClick={() => navigate("/return", "Returns")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <PiKeyReturnFill className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -73,7 +73,7 @@ const SideNav = () => {
 
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          onClick={() => navigate("/dashboard")}
+          onClick={() => navigate("/supplier", "Supplier")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <FaTruckFast className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
@@ -85,7 +85,7 @@ const SideNav = () => {
       <div>
         <button
           className="relative text-[#EEEE] text-xl mb-3 flex items-center hover:text-white pl-4 transition-all duration-300 ease-in-out group"
-          // onClick={() => navigate("/dashboard")}
+          // onClick={() => navigate("/supplier")}
         >
           <span className="absolute left-0 top-0 h-full w-1 bg-[#FF7171] scale-y-0 group-hover:scale-y-100 transition-transform duration-300 ease-in-out"></span>
           <BiLogOut className="mr-2 text-[#EEEE] group-hover:text-[#FF7171]" />{" "}
