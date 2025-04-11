@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TbLogout2 } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
 import { IoMdSearch } from "react-icons/io";
@@ -8,7 +8,7 @@ import { CgProfile } from "react-icons/cg";
 import profileImg from "../assets/image/profileImg.jpeg";
 import { PiDropboxLogoBold } from "react-icons/pi";
 
-const Headers = () => {
+const Headers = ({ activeSection }) => {
   const navigate = useNavigate();
   return (
     <header className="flex items-center  w-full h-30 px-4 justify-between bg-[#232323]">
@@ -23,7 +23,7 @@ const Headers = () => {
       </div>
 
       <div className="flex absolute left-80 items-center mt-10 ml-5">
-        <h1 className="text-[#EEEEEE] font-bold text-3xl ">Product</h1>
+        <h1 className="text-[#EEEEEE] font-bold text-3xl ">{activeSection}</h1>
       </div>
 
       <div className="flex flex-col justify-center p-5 mt-10">
