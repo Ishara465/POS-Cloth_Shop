@@ -11,11 +11,13 @@ import {
 } from "./pages/index.js";
 import Headers from "./shared/Headers.jsx";
 import { useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   const [activeSection, setActiveSection] = useState("Home");
   return (
     <BrowserRouter>
+      <Toaster position="top-center" reverseOrder={false} />
       <Headers activeSection={activeSection} />
       <Routes>
         <Route path="/" element={<Home />}></Route>

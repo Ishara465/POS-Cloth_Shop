@@ -12,3 +12,22 @@
   justify-content: center;
   z-index: 50;
 }
+
+/* Custom Scrollbar Styling */
+.scrollbar::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: #232323; /* Background of the scrollbar track */
+  border-radius: 10px; /* Rounded corners for the track */
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #ff7171; /* Color of the scrollbar thumb */
+  border-radius: 10px; /* Rounded corners for the thumb */
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ff8a8a; /* Color when hovering over the scrollbar thumb */
+}
