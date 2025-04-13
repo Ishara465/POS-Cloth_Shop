@@ -1,11 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setInventory } from "../../redux/slices/inventorySlice.js";
-import toast from "react-hot-toast";
+import { updateTable } from "../../redux/slices/inventorySlice";
 
-const AddItems = ({ setIsModalOpen }) => {
-  //   if (setIsModalOpen) return null;
-
+const UpdateInventory = ({ setIsModalOpenUpdate, selectedProduct }) => {
   const dispatch = useDispatch();
 
   const [productName, setProductName] = useState("");
@@ -18,35 +15,12 @@ const AddItems = ({ setIsModalOpen }) => {
   const [productCode, setProductCode] = useState("");
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setIsModalOpenUpdate(false);
   };
 
-  const handleAddItems = () => {
-    if (
-      !productName ||
-      !category ||
-      !brand ||
-      !size ||
-      !color ||
-      !price ||
-      !quantity ||
-      !productCode
-    ) {
-      toast.error("All fields are required!");
-      return;
-    }
-    if ((price && isNaN(price)) || (quantity && isNaN(quantity))) {
-      toast.error("Price and Quantity should be numbers!");
-      return;
-    }
-
-    if (!/^[A-Za-z0-9]+$/.test(productCode)) {
-      toast.error("Code should contain only alphanumeric characters!");
-      return;
-    }
-
+  const handleUpdate = () => {
     dispatch(
-      setInventory({
+      updateTable({
         productName,
         category,
         brand,
@@ -57,14 +31,41 @@ const AddItems = ({ setIsModalOpen }) => {
         productCode,
       })
     );
-    setIsModalOpen(false);
+    setIsModalOpenUpdate(false);
   };
 
+  // const handleUpdate = () => {
+  //   console.log("update", {
+  //     productName,
+  //     category,
+  //     brand,
+  //     size,
+  //     color,
+  //     price,
+  //     quantity,
+  //     productCode,
+  //   });
+  //   setIsModalOpenUpdate(false);
+  // };
+
+  useEffect(() => {
+    console.log("Selected Product:", selectedProduct);
+    if (selectedProduct) {
+      setProductName(selectedProduct.productName || "");
+      setCategory(selectedProduct.category || "");
+      setBrand(selectedProduct.brand || "");
+      setSize(selectedProduct.size || "");
+      setColor(selectedProduct.color || "");
+      setPrice(selectedProduct.price || "");
+      setQuantity(selectedProduct.quantity || "");
+      setProductCode(selectedProduct.productCode || "");
+    }
+  }, [selectedProduct]);
   return (
     <div className="fixed inset-0 bg-[#232323]  flex items-center justify-center z-50 modal-backdrop ">
       <div className="bg-[#383838] rounded-lg p-6 w-96 border-1 hover:border-[#FF7171] border-[#EEEEEE] transition duration-300 ease-in-out hover:shadow-[0_0_15px_#FF7171]">
         <h2 className="text-xl text-[#EEEEEE] font-bold mb-4">
-          Add New Product
+          Update Product
         </h2>
 
         <div className="grid grid-cols-2 gap-4 mb-4">
@@ -184,7 +185,7 @@ const AddItems = ({ setIsModalOpen }) => {
             Cancel
           </button>
           <button
-            onClick={handleAddItems}
+            onClick={handleUpdate}
             className="bg-[#FF7171] text-white px-4 py-2 rounded-lg hover:bg-[#FF8A8A] transition duration-300 ease-in-out"
           >
             Save
@@ -195,4 +196,4 @@ const AddItems = ({ setIsModalOpen }) => {
   );
 };
 
-export default AddItems;
+export default UpdateInventory;

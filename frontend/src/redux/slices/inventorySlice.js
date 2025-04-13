@@ -13,9 +13,7 @@ const inventorySlice = createSlice({
 
     // Remove an inventory item by productCode
     removeInventory: (state, action) => {
-      return state.filter(
-        (item) => item.productCode !== action.payload.productCode
-      );
+      return state.filter((item) => item.productCode !== action.payload);
     },
 
     // Update an inventory item by productCode

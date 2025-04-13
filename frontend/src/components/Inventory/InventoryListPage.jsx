@@ -1,19 +1,33 @@
 import React, { useEffect, useState } from "react";
 import { IoSearch } from "react-icons/io5";
 import AddItems from "./AddItems";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { removeInventory } from "../../redux/slices/inventorySlice";
+import UpdateInventory from "./UpdateInventory";
+import toast from "react-hot-toast";
 
 const InventoryListPage = () => {
+  const dispatch = useDispatch();
   const inventory = useSelector((state) => state.inventory);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpenUpdate, setIsModalOpenUpdate] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
-  const handleModelClose = () => {
-    setIsModalOpen(false);
+  const handleOpenModalUpdate = (item) => {
+    setIsModalOpenUpdate(true);
+    setSelectedProduct(item);
+  };
+
+  const handleDelete = (productCode) => {
+    if (window.confirm("Are you sure you want to delete this item?")) {
+      dispatch(removeInventory(productCode));
+      toast.success("Item deleted successfully!");
+    }
   };
 
   return (
@@ -31,7 +45,7 @@ const InventoryListPage = () => {
         </div>
         <div className="relative right-0">
           <button
-            className="text-lg font-bold hover:bg-[#8A8A8A] transition duration-300 ease-in-out rounded-lg bg-[#FF7171] text-[#EEEEEE] px-5 py-2"
+            className="text-lg font-bold hover:bg-[#FF8A8A] transition duration-300 ease-in-out rounded-lg bg-[#FF7171] text-[#EEEEEE] px-5 py-2"
             onClick={handleOpenModal}
           >
             Add
@@ -49,9 +63,9 @@ const InventoryListPage = () => {
                 <th className="px-4 py-2">Size</th>
                 <th className="px-4 py-2">Color</th>
                 <th className="px-4 py-2">Price</th>
-                <th className="px-4 py-2">Stock</th>
+                <th className="px-4 py-2">Quantity</th>
+                <th className="px-4 py-2">Product Code</th>
                 <th className="px-4 py-2">Actions</th>
-                <th className="px-4 py-2">Code</th>
               </tr>
             </thead>
             <tbody>
@@ -67,13 +81,16 @@ const InventoryListPage = () => {
                   <td className="px-4 py-2">{item.quantity}</td>
                   <td className="px-4 py-2">{item.productCode}</td>
                   <td className="px-4 py-2 gap-2 flex">
-                    <button className="text-lg font-bold hover:bg-yellow-300 transition duration-300 ease-in-out rounded-lg bg-yellow-500 text-[#232323] px-2 py-1">
-                      Edit
-                    </button>
-                    <button className="text-lg font-bold hover:bg-red-400 transition duration-300 ease-in-out rounded-lg bg-red-500 text-[#232323] px-2 py-1">
+                    <button
+                      onClick={() => handleDelete(item.productCode)}
+                      className="text-lg font-semibold hover:bg-[#FF8A8A] transition duration-300 ease-in-out rounded-lg bg-[#FF7171] text-[#EEEEEE] px-2 py-1"
+                    >
                       Delete
                     </button>
-                    <button className="text-lg font-bold hover:bg-green-300 transition duration-300 ease-in-out rounded-lg bg-green-500 text-[#232323] px-2 py-1">
+                    <button
+                      onClick={() => handleOpenModalUpdate(item)}
+                      className="text-lg font-semibold hover:bg-[#3A3A3A] transition duration-300 ease-in-out rounded-lg bg-[#232323] text-[#EEEEE] px-2 py-1"
+                    >
                       Update
                     </button>
                   </td>
@@ -85,6 +102,12 @@ const InventoryListPage = () => {
       </div>
 
       {isModalOpen && <AddItems setIsModalOpen={setIsModalOpen} />}
+      {isModalOpenUpdate && (
+        <UpdateInventory
+          setIsModalOpenUpdate={setIsModalOpenUpdate}
+          selectedProduct={selectedProduct}
+        />
+      )}
     </div>
   );
 };
