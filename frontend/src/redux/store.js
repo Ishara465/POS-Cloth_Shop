@@ -4,6 +4,7 @@ import reminderSlice from "./slices/reminderSlice.js";
 import customerSlice from "./slices/customerSlice.js";
 import refundProcessingSlice from "./slices/return/refundProcessing.js";
 import returnAndRefundSlice from "./slices/return/returnAndRefundSlice.js";
+import supplierSlice from "./slices/supplier.js";
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     customer: customerSlice,
     refundProcessing: refundProcessingSlice,
     returnAndRefund: returnAndRefundSlice,
+    supplier: supplierSlice,
   },
   devTools: import.meta.env.NODE_ENV !== "production",
 });
