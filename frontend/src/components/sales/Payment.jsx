@@ -1,136 +1,81 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 
-const Payment = () => {
-  const [cart, setCart] = useState([
-    { id: 1, name: "Shirt", qty: 2, price: 25, dis: 5 },
-    { id: 2, name: "Pants", qty: 1, price: 30, dis: 3 },
-  ]);
-  const [paymentMethod, setPaymentMethod] = useState(""); // Selected payment method
-  const [heldTransactions, setHeldTransactions] = useState([
-    { id: "001", date: "2025-04-01", amount: 88 },
-    { id: "002", date: "2025-04-02", amount: 45 },
-  ]);
+const Payment = ({ payment }) => {
+  const [paidAmount, setPaidAmount] = useState(0);
+  const showItems = useSelector((state) => state.addProduct);
 
-  const calculateSubtotal = () => {
-    return cart.reduce((total, item) => total + item.qty * item.price, 0);
-  };
-
-  const handleHoldTransaction = () => {
-    const newTransaction = {
-      id: String(heldTransactions.length + 1).padStart(3, "0"),
-      date: new Date().toISOString().split("T")[0],
-      amount: calculateSubtotal(),
-    };
-    setHeldTransactions([...heldTransactions, newTransaction]);
-  };
-
-  const handleResumeTransaction = (id) => {
-    alert(`Resuming transaction ID: ${id}`);
+  const reCashAmount = (paidAmount, payment) => {
+    const total = paidAmount - payment;
+    return total;
   };
 
   return (
     <div className="bg-[#232323] p-3 rounded-lg w-120 h-150">
       {/* Header */}
-      <h1 className="text-[#EEEEEE] text-2xl font-bold mb-4">
-        Payment Methods
-      </h1>
-
+      <h1 className="text-[#EEEEEE] text-2xl font-bold mb-4">Bill</h1>
       {/* Select Payment Method */}
-      <div className="mb-4">
-        <label className="text-[#EEEEEE] block mb-2">
-          Select Payment Method:
-        </label>
-        <div className="flex gap-4">
-          <button
-            onClick={() => setPaymentMethod("Cash")}
-            className={`px-4 py-2 rounded-lg ${
-              paymentMethod === "Cash" ? "bg-green-500" : "bg-[#383838]"
-            } text-[#EEEEEE]`}
-          >
-            Cash
-          </button>
-          <button
-            onClick={() => setPaymentMethod("Card")}
-            className={`px-4 py-2 rounded-lg ${
-              paymentMethod === "Card" ? "bg-green-500" : "bg-[#383838]"
-            } text-[#EEEEEE]`}
-          >
-            Credit/Debit Card
-          </button>
-          <button
-            onClick={() => setPaymentMethod("Wallet")}
-            className={`px-4 py-2 rounded-lg ${
-              paymentMethod === "Wallet" ? "bg-green-500" : "bg-[#383838]"
-            } text-[#EEEEEE]`}
-          >
-            Digital Wallet
-          </button>
-        </div>
+      <div className="mb-4 justify-between flex ">
+        <label className="text-[#EEEEEE] block mb-2">Total Bill</label>
+        <label className="text-[#EEEEEE] ">Rs. {payment}</label>
       </div>
-
       {/* Payment Details */}
       <div className="mb-4">
-        <label className="text-[#EEEEEE] block mb-2">Payment Details:</label>
+        <label className="text-[#EEEEEE] block mb-2">Paid Amount</label>
         <input
           type="text"
           placeholder="Enter Payment Details"
           className="w-full p-2 rounded-lg bg-[#383838] text-[#EEEEEE] placeholder-[#8A8A8A]"
+          value={paidAmount}
+          onChange={(e) => setPaidAmount(e.target.value)}
         />
       </div>
-
-      {/* Complete Payment Button */}
-      <button className="bg-green-500 px-6 py-2 rounded-lg text-[#EEEEEE] w-full mb-4">
-        Complete Payment
-      </button>
+      <div className="justify-between flex">
+        <label className="text-[#EEEEEE] block mb-2">ReCash</label>
+        <label className="text-[#EEEEEE] block mb-2">
+          {reCashAmount(paidAmount, payment)}
+        </label>
+      </div>
 
       {/* Hold Current Transaction */}
-      <button
-        onClick={handleHoldTransaction}
-        className="bg-yellow-500 px-6 py-2 rounded-lg text-[#232323] w-full mb-4"
-      >
-        Hold Current Transaction
-      </button>
 
       {/* Held Transactions */}
       <div className="bg-[#383838] p-4 rounded-lg">
-        <h2 className="text-[#EEEEEE] text-xl font-bold mb-4">
-          Held Transactions
+        <h2 className="text-[#EEEEEE] text-xl font-bold mb-4 text-center">
+          Items
         </h2>
         <table className="w-full text-left text-[#EEEEEE] border-collapse">
           <thead>
             <tr className="bg-[#383838]">
               <th className="px-4 py-2 border border-[#232323]">
-                Transaction ID
+                Product Name
               </th>
-              <th className="px-4 py-2 border border-[#232323]">Date</th>
-              <th className="px-4 py-2 border border-[#232323]">Amount</th>
-              <th className="px-4 py-2 border border-[#232323]">Actions</th>
+              <th className="px-4 py-2 border border-[#232323]">Qty</th>
+              <th className="px-4 py-2 border border-[#232323]">Price</th>
             </tr>
           </thead>
           <tbody>
-            {heldTransactions.map((transaction) => (
-              <tr key={transaction.id} className="bg-[#383838]">
+            {showItems.map((item) => (
+              <tr key={item.id} className="bg-[#383838]">
                 <td className="px-4 py-2 border border-[#232323]">
-                  {transaction.id}
+                  {item.productName}
                 </td>
                 <td className="px-4 py-2 border border-[#232323]">
-                  {transaction.date}
+                  {item.quantity}
                 </td>
                 <td className="px-4 py-2 border border-[#232323]">
-                  ${transaction.amount.toFixed(2)}
-                </td>
-                <td className="px-4 py-2 border border-[#232323]">
-                  <button
-                    onClick={() => handleResumeTransaction(transaction.id)}
-                    className="bg-blue-500 px-3 py-1 rounded-lg"
-                  >
-                    Resume
-                  </button>
+                  ${item.price * item.quantity}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+      <div className="mb-3 py-2">
+        {/*  Generate Bill */}
+        <button className="bg-green-500 px-6 py-2 rounded-lg text-[#EEEEEE] w-full mb-4">
+          Generate Bill
+        </button>
       </div>
     </div>
   );

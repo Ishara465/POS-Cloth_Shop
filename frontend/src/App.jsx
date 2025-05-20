@@ -9,6 +9,7 @@ import {
   Sales,
   Supplier,
 } from "./pages/index.js";
+import DiscountTable from "./components/sales/DiscountTable.jsx";
 import Headers from "./shared/Headers.jsx";
 import { useState } from "react";
 import { Toaster } from "react-hot-toast";
