@@ -1,5 +1,5 @@
 const { default: mongoose } = require("mongoose");
-const Product = require("../models/product.Model.js");
+const Product = require("../models/productModel.js");
 const createHttpError = require("http-errors");
 
 const addProduct = async (req, res, next) => {
