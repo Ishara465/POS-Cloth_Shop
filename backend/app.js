@@ -22,6 +22,7 @@ app.get("/", (req, res) => {
 // Other End points
 app.use("/api/user", require("./routes/userRoute.js"));
 app.use("/api/product", require("./routes/productRoute.js"));
+app.use("/api/customer", require("./routes/customerRoute.js"));
 
 // Global Error Handler
 app.use(globalErrorHandler);
