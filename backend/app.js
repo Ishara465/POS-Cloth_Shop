@@ -3,16 +3,25 @@ const express = require("express");
 const connectDB = require("./config/database.js");
 const config = require("./config/config.js");
 const globalErrorHandler = require("./middlewares/globalErrorHandler.js");
-const createHttpError = require("http-errors");
+const cookieParser = require("cookie-parser");
+
 const app = express();
 
 const PORT = config.port;
 connectDB();
 
+// Middleware
+app.use(express.json()); // parse incoming req in json format
+app.use(cookieParser());
+
 // Root Endpoint
 app.get("/", (req, res) => {
   res.json({ message: "Hello from POS Server!" });
 });
+
+// Other End points
+app.use("/api/user", require("./routes/userRoute.js"));
+app.use("/api/product", require("./routes/productRoute.js"));
 
 // Global Error Handler
 app.use(globalErrorHandler);
