@@ -7,6 +7,7 @@ import returnAndRefundSlice from "./slices/return/returnAndRefundSlice.js";
 import supplierSlice from "./slices/supplier.js";
 import AddProductSlice from "./slices/sales/AddProducts.js";
 import navigationReducer from "./slices/sales/navigationSlice.js";
+import userSlice from "./slices/userSlice.js";
 
 const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ const store = configureStore({
     supplier: supplierSlice,
     addProduct: AddProductSlice,
     navigation: navigationReducer,
+    user: userSlice,
   },
   devTools: import.meta.env.NODE_ENV !== "production",
 });
