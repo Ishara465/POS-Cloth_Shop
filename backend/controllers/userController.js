@@ -26,7 +26,7 @@ const register = async (req, res, next) => {
     }
 
     const user = { name, phone, email, password, role };
-    const newUser = User(user);
+    const newUser = new User(user);
     await newUser.save();
 
     res.status(201).json({
@@ -98,4 +98,16 @@ const getUserData = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, getUserData };
+const logout = async (req, res, next) => {
+  try {
+    res.clearCookie("accessToken");
+    res.status(200).json({
+      success: true,
+      message: " User Logged out successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+module.exports = { register, login, getUserData, logout };

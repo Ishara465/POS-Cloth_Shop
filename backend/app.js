@@ -4,6 +4,7 @@ const connectDB = require("./config/database.js");
 const config = require("./config/config.js");
 const globalErrorHandler = require("./middlewares/globalErrorHandler.js");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 
@@ -13,6 +14,12 @@ connectDB();
 // Middleware
 app.use(express.json()); // parse incoming req in json format
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 
 // Root Endpoint
 app.get("/", (req, res) => {
